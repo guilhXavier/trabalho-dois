@@ -19,21 +19,25 @@ public class ResenhaController {
     private final ResenhaService resenhaService;
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<String> cadastrarResenha(@RequestBody ResenhaRequestDto resenhaRequestDto) {
         return ResponseEntity.ok(resenhaService.cadastrarResenha(resenhaRequestDto));
     }
 
     @GetMapping
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<Page<ResenhaResponseDto>> buscarTodasResenhas(Pageable pageable) {
         return ResponseEntity.ok(resenhaService.buscarTodasResenhas(pageable));
     }
 
     @GetMapping(path = "/buscar/palavraChave/{palavraChave}")
-    public ResponseEntity<Page<ResenhaResponseDto>> buscarResenhasPorPalavraChave(String palavraChave, Pageable pageable) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity<Page<ResenhaResponseDto>> buscarResenhasPorPalavraChave(@PathVariable("palavraChave") String palavraChave, Pageable pageable) {
         return ResponseEntity.ok(resenhaService.buscarResenhasPorPalavraChave(palavraChave, pageable));
     }
 
     @GetMapping(path = "/buscar/id/{id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity<ResenhaResponseDto> buscarResenhaPorId(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(resenhaService.buscarResenhaPorId(id));
     }
